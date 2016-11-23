@@ -32,7 +32,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OptionBuilderTest.cs" />
+    <Compile Include="CommandLineBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
