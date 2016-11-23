@@ -8,6 +8,7 @@ namespace Unclazz.Commons.CLI
 		private static readonly Action<IEnumerable<string>> noop = (ss) => { };
 
 		private readonly string commandName = string.Empty;
+		private string description = string.Empty;
 		private bool caseSensitive = true;
 		private IList<IOption> options = new List<IOption>();
 		private Action<IEnumerable<string>> setterDelegate = noop;
@@ -21,6 +22,11 @@ namespace Unclazz.Commons.CLI
 			commandName = cn;
 		}
 
+		public CommandLineBuilder Description(string d)
+		{
+			description = d == null ? string.Empty : d;
+			return this;
+		}
 		public CommandLineBuilder CaseSensitive(bool cs)
 		{
 			caseSensitive = cs;
@@ -54,7 +60,8 @@ namespace Unclazz.Commons.CLI
 			{
 				throw new ApplicationException("No option specified.");
 			}
-			return new CommandLine(commandName, caseSensitive, options, setterDelegate);
+			return new CommandLine(commandName, description, caseSensitive, 
+			                       options, setterDelegate);
 		}
 	}
 

@@ -14,6 +14,11 @@ namespace Unclazz.Commons.CLI
 		/// <value>コマンド名</value>
 		string CommandName { get; }
 		/// <summary>
+		/// コマンドの説明です。
+		/// </summary>
+		/// <value>コマンドの説明</value>
+		string Description { get; }
+		/// <summary>
 		/// コマンドライン引数のパースのとき大文字小文字を区別する場合<c>true</c>を返します。
 		/// </summary>
 		/// <value>大文字小文字を区別する場合<c>true</c></value>

@@ -35,11 +35,14 @@ namespace Unclazz.Commons.CLI
 		}
 
 		public string CommandName { get; }
+		public string Description { get; }
 		public bool CaseSensitive { get; }
 		public IEnumerable<IOption> Options { get; }
 		public Action<IEnumerable<string>> SetterDelegate { get; }
 
-		internal CommandLine(string cn, bool cs, IEnumerable<IOption> os, Action<IEnumerable<string>> sd)
+		internal CommandLine(string cn, string d, bool cs,
+		                     IEnumerable<IOption> os,
+		                     Action<IEnumerable<string>> sd)
 		{
 			if (cn == null || cn.Length == 0)
 			{
@@ -51,6 +54,7 @@ namespace Unclazz.Commons.CLI
 			}
 
 			CommandName = cn;
+			Description = d;
 			CaseSensitive = cs;
 			Options = os;
 			SetterDelegate = sd;
