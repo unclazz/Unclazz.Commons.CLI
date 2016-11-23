@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineBuilderTest.cs" />
+    <Compile Include="OptionBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unclazz.Commons.CLI\Unclazz.Commons.CLI.csproj">
