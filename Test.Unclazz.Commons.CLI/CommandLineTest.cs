@@ -254,5 +254,82 @@ namespace Test.Unclazz.Commons.CLI
 				cl0.Parse(Arguments("foo", "bar", "baz"));
 			});
 		}
+
+		[Test()]
+		public void Parse_Required_FoundInArguments_WithAppSettings()
+		{
+			// Arrange
+			string v0 = null;
+			IList<string> vs = null;
+			var cl0 = CommandLine.Builder("test.exe")
+								 .SetterDelegate(ss => vs = ss.ToList())
+								 .AddOption("/f")
+			                     .SettingName("Test.Foo")
+								 .HasArgument()
+								 .Required()
+								 .SetterDelegate((string s) => v0 = s)
+								 .Build();
+			var dict = new Dictionary<string, string>();
+			dict.Add("Test.Foo", "BAR");
+
+			// Act
+			cl0.Parse(Arguments("/f", "bar", "baz"), dict);
+
+			// Assert
+			Assert.That(v0, Is.EqualTo("bar"));
+			Assert.That(vs.Count, Is.EqualTo(1));
+		}
+
+		[Test()]
+		public void Parse_Required_NotFoundInArguments_WithAppSettings()
+		{
+			// Arrange
+			string v0 = null;
+			IList<string> vs = null;
+			var cl0 = CommandLine.Builder("test.exe")
+								 .SetterDelegate(ss => vs = ss.ToList())
+								 .AddOption("/f")
+								 .SettingName("Test.Foo")
+								 .HasArgument()
+								 .Required()
+								 .SetterDelegate((string s) => v0 = s)
+								 .Build();
+
+			var dict = new Dictionary<string, string>();
+			dict.Add("Test.Foo", "BAR");
+
+			// Act
+			cl0.Parse(Arguments("/b", "bar", "baz"), dict);
+
+			// Assert
+			Assert.That(v0, Is.EqualTo("BAR"));
+			Assert.That(vs.Count, Is.EqualTo(3));
+		}
+
+		[Test()]
+		public void Parse_Required_NotFoundInArgumentsAndAppSettings()
+		{
+			// Arrange
+			string v0 = null;
+			IList<string> vs = null;
+			var cl0 = CommandLine.Builder("test.exe")
+								 .SetterDelegate(ss => vs = ss.ToList())
+								 .AddOption("/f")
+								 .SettingName("Test.Foo")
+								 .HasArgument()
+								 .Required()
+								 .SetterDelegate((string s) => v0 = s)
+								 .Build();
+
+			var dict = new Dictionary<string, string>();
+			dict.Add("Test.Bar", "BAR");
+
+			// Act
+			// Assert
+			Assert.Throws<ParseException>(() =>
+			{
+				cl0.Parse(Arguments("foo", "bar", "baz"));
+			});
+		}
 	}
 }
