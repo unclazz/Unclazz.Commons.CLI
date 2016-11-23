@@ -37,9 +37,18 @@ namespace Unclazz.Commons.CLI
 		Action<IEnumerable<string>> SetterDelegate { get; }
 		/// <summary>
 		/// コマンドライン引数をパースします。
+		/// アプリケーション構成ファイルの設定情報がフォールバックとして利用されます。
 		/// </summary>
-		/// <param name="rawArgs">コマンドライン引数</param>
+		/// <param name="arguments">コマンドライン引数</param>
 		/// <exception cref="ParseException">パース中にエラーが発生した場合</exception>
-		void Parse(IEnumerable<string> rawArgs);
+		void Parse(IEnumerable<string> arguments);
+		/// <summary>
+		/// コマンドライン引数をパースします。
+		/// 第2引数で指定された設定情報がフォールバックとして利用されます。
+		/// </summary>
+		/// <param name="arguments">コマンドライン引数</param>
+		/// <param name="settings">設定情報を格納した辞書</param>
+		/// <exception cref="ParseException">パース中にエラーが発生した場合</exception>
+		void Parse(IEnumerable<string> arguments, IDictionary<string, string> settings);
 	}
 }
