@@ -233,7 +233,7 @@ namespace Unclazz.Commons.CLI
 			try
 			{
 				// オプション定義に登録されたデリゲートを呼び出す
-				nameMatched.SetterDelegate(latter);
+				nameMatched.SetterDelegate(nameMatched.HasArgument ? latter : string.Empty);
 				// 値解決は成功したものとしてtrueを返す
 				return true;
 			}
@@ -279,7 +279,7 @@ namespace Unclazz.Commons.CLI
 			try
 			{
 				// オプション定義に登録されたデリゲートを呼び出す
-				nameMatched.SetterDelegate(value);
+				nameMatched.SetterDelegate(nameMatched.HasArgument ? value : string.Empty);
 				// 値解決は成功したものとしてtrueを返す
 				return true;
 			}
