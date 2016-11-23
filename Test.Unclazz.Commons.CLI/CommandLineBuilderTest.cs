@@ -6,7 +6,7 @@ using System.Linq;
 namespace Test.Unclazz.Commons.CLI
 {
 	[TestFixture()]
-	public class OptionBuilderTest
+	public class CommandLineBuilderTest
 	{
 		[Test()]
 		public void Build_ReturnsNewInstanceOfICommandLine()
