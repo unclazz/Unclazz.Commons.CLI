@@ -41,6 +41,7 @@
     <Compile Include="CommandLine.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="OptionCollection.cs" />
+    <Compile Include="HelpFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
