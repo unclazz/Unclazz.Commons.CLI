@@ -43,10 +43,12 @@ namespace Unclazz.Commons.CLI
 		public string Description { get; }
 		public bool CaseSensitive { get; }
 		public OptionCollection Options { get; }
+		public IEnumerable<string> ArgumentNames { get; }
 		public Action<IEnumerable<string>> SetterDelegate { get; }
 
 		internal CommandLine(string cn, string d, bool cs,
 		                     IEnumerable<IOption> os,
+		                     IEnumerable<string> ags,
 		                     Action<IEnumerable<string>> sd)
 		{
 			if (cn == null || cn.Length == 0)
@@ -62,6 +64,7 @@ namespace Unclazz.Commons.CLI
 			Description = d;
 			CaseSensitive = cs;
 			Options = new OptionCollection(os);
+			ArgumentNames = ags;
 			SetterDelegate = sd;
 		}
 

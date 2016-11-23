@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Unclazz.Commons.CLI
 {
 	/// <summary>
@@ -8,22 +9,18 @@ namespace Unclazz.Commons.CLI
 	{
 		private static readonly Action<string> noop = (s) => { };
 
-		private readonly CommandLineBuilder clb;
 		private readonly string name;
 		private string alternativeName = string.Empty;
 		private string settingName = string.Empty;
 		private bool required = false;
 		private bool hasArgument = false;
+		private string argumentName = string.Empty;
 		private bool multiple = false;
 		private string description = string.Empty;
 		private Action<string> setterDelegate = noop;
 
-		internal OptionBuilder(CommandLineBuilder clb, string n)
+		internal OptionBuilder(string n)
 		{
-			if (clb == null)
-			{
-				throw new ArgumentNullException(nameof(clb));
-			}
 			if (n == null)
 			{
 				throw new ArgumentNullException(nameof(n));
@@ -32,8 +29,7 @@ namespace Unclazz.Commons.CLI
 			{
 				throw new ArgumentException("Option name must not be empty.");
 			}
-			this.clb = clb;
-			this.name = n;
+			name = n;
 		}
 
 		/// <summary>
@@ -91,6 +87,16 @@ namespace Unclazz.Commons.CLI
 		public OptionBuilder HasArgument()
 		{
 			return HasArgument(true);
+		}
+		/// <summary>
+		/// オプションの引数名を設定します。
+		/// </summary>
+		/// <returns>ビルダー</returns>
+		/// <param name="argName">Argument name.</param>
+		public OptionBuilder ArgumentName(string argName)
+		{
+			argumentName = argName == null ? string.Empty : argName;
+			return this;
 		}
 		/// <summary>
 		/// オプションが複数回指定ができるかどうかを設定します。
@@ -189,40 +195,14 @@ namespace Unclazz.Commons.CLI
 			setterDelegate = setter == null ? noop : (s) => setter(DateTime.Parse(s));
 			return this;
 		}
-		IOption _build()
+		/// <summary>
+		/// 新しい<see cref="IOption"/>のインスタンスを構築します。
+		/// </summary>
+		/// <returns>コマンドライン・オプションの定義情報</returns>
+		public IOption Build()
 		{
 			return new Option(name, alternativeName, settingName, required,
-							  hasArgument, multiple, description, setterDelegate);
-		}
-		/// <summary>
-		/// 新しいオプションの定義を開始します。
-		/// </summary>
-		/// <returns>ビルダー</returns>
-		/// <param name="n">新しいオプションの名前</param>
-		public OptionBuilder AndOption(string n)
-		{
-			clb.AddOption(_build());
-			return new OptionBuilder(clb, n);
-		}
-		/// <summary>
-		/// 新しいオプションの定義を追加します。
-		/// </summary>
-		/// <returns>ビルダー</returns>
-		/// <param name="o">新しいオプション</param>
-		public CommandLineBuilder AndOption(IOption o)
-		{
-			clb.AddOption(_build());
-			clb.AddOption(o);
-			return clb;
-		}
-		/// <summary>
-		/// 新しい<see cref="ICommandLine"/>のインスタンスを構築します。
-		/// </summary>
-		/// <returns>コマンドラインの定義情報</returns>
-		public ICommandLine Build()
-		{
-			clb.AddOption(_build());
-			return clb.Build();
+							  hasArgument, argumentName, multiple, description, setterDelegate);
 		}
 	}
 }

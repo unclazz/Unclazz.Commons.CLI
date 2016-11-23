@@ -11,11 +11,11 @@ namespace Test.Unclazz.Commons.CLI
 		{
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.Description("foo is foo");
+								.AddOption(Option.Builder("foo")
+			                               .Description("foo is foo"));
 			var b1 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.Description(null);
+								.AddOption(Option.Builder("foo")
+			                               .Description(null));
 
 			// Act
 			var cl0 = b0.Build();
@@ -31,16 +31,16 @@ namespace Test.Unclazz.Commons.CLI
 		{
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 			var b1 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.HasArgument(true);
+								.AddOption(Option.Builder("foo")
+			                               .HasArgument(true));
 			var b2 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.HasArgument();
+								.AddOption(Option.Builder("foo")
+			                               .HasArgument());
 			var b3 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.HasArgument(false);
+								.AddOption(Option.Builder("foo")
+			                               .HasArgument(false));
 
 			// Act
 			var cl0 = b0.Build();
@@ -60,16 +60,16 @@ namespace Test.Unclazz.Commons.CLI
 		{
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 			var b1 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-			                    .Required(true);
+								.AddOption(Option.Builder("foo")
+			                               .Required(true));
 			var b2 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.Required();
+								.AddOption(Option.Builder("foo")
+			                               .Required());
 			var b3 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.Required(false);
+								.AddOption(Option.Builder("foo")
+			                               .Required(false));
 
 			// Act
 			var cl0 = b0.Build();
@@ -89,16 +89,16 @@ namespace Test.Unclazz.Commons.CLI
 		{
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 			var b1 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-			                    .Multiple(true);
+								.AddOption(Option.Builder("foo")
+			                               .Multiple(true));
 			var b2 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.Multiple();
+								.AddOption(Option.Builder("foo")
+			                               .Multiple());
 			var b3 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.Multiple(false);
+								.AddOption(Option.Builder("foo")
+			                               .Multiple(false));
 
 			// Act
 			var cl0 = b0.Build();
@@ -118,13 +118,13 @@ namespace Test.Unclazz.Commons.CLI
 		{
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 			var b1 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-			                    .AlternativeName("altFoo");
+								.AddOption(Option.Builder("foo")
+			                               .AlternativeName("altFoo"));
 			var b2 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.AlternativeName(null);
+								.AddOption(Option.Builder("foo")
+			                               .AlternativeName(null));
 
 			// Act
 			var cl0 = b0.Build();
@@ -142,13 +142,13 @@ namespace Test.Unclazz.Commons.CLI
 		{
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 			var b1 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-			                    .SettingName("altFoo");
+								.AddOption(Option.Builder("foo")
+			                               .SettingName("altFoo"));
 			var b2 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.SettingName(null);
+								.AddOption(Option.Builder("foo")
+			                               .SettingName(null));
 
 			// Act
 			var cl0 = b0.Build();
@@ -167,20 +167,20 @@ namespace Test.Unclazz.Commons.CLI
 			// Arrange
 			string s0 = null;
 			var b0 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-			                    .SetterDelegate((s) => s0 = s);
+								.AddOption(Option.Builder("foo")
+			                               .SetterDelegate((s) => s0 = s));
 			int i1 = 0;
 			var b1 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.SetterDelegate((int i) => i1 = i);
+								.AddOption(Option.Builder("foo")
+			                               .SetterDelegate((int i) => i1 = i));
 			double d2 = 0.0;
 			var b2 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.SetterDelegate((double d) => d2 = d);
+								.AddOption(Option.Builder("foo")
+			                               .SetterDelegate((double d) => d2 = d));
 			bool bl3 = false;
 			var b3 = CommandLine.Builder("test.exe")
-								.AddOption("foo")
-								.SetterDelegate(() => bl3 = true);
+								.AddOption(Option.Builder("foo")
+			                               .SetterDelegate(() => bl3 = true));
 
 			// Act
 			var cl0 = b0.Build();

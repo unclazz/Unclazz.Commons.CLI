@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Unclazz.Commons.CLI
 {
@@ -15,6 +16,7 @@ namespace Unclazz.Commons.CLI
 		private string description = string.Empty;
 		private bool caseSensitive = true;
 		private ISet<IOption> options = new HashSet<IOption>();
+		private IEnumerable<string> argumentNames = Enumerable.Empty<string>();
 		private Action<IEnumerable<string>> setterDelegate = noop;
 
 		internal CommandLineBuilder(string cn)
@@ -70,13 +72,23 @@ namespace Unclazz.Commons.CLI
 		}
 		/// <summary>
 		/// コマンドライン・オプションの定義を追加します。
-		/// このメソッドはオプションを組み立てるためのビルダーへの参照を返します。
 		/// </summary>
 		/// <returns>ビルダー</returns>
-		/// <param name="n">オプションの名前</param>
-		public OptionBuilder AddOption(string n)
+		/// <param name="b">コマンドライン・オプションのビルダー</param>
+		public CommandLineBuilder AddOption(OptionBuilder b)
 		{
-			return new OptionBuilder(this, n);
+			return AddOption(b.Build());
+		}
+		/// <summary>
+		/// コマンドライン引数のうちコマンドライン・オプションの定義情報に
+		/// 含まれなかった「残りの引数」の名前のシーケンスを設定します。
+		/// </summary>
+		/// <returns>ビルダー</returns>
+		/// <param name="argNames">「残りの引数」の名前</param>
+		public CommandLineBuilder ArgumentNames(params string[] argNames)
+		{
+			argumentNames = argNames == null ? Enumerable.Empty<string>() : argNames;
+			return this;
 		}
 		/// <summary>
 		/// コマンドライン引数のうちコマンドライン・オプションの定義情報に
@@ -102,7 +114,7 @@ namespace Unclazz.Commons.CLI
 				throw new ApplicationException("No option specified.");
 			}
 			return new CommandLine(commandName, description, caseSensitive, 
-			                       options, setterDelegate);
+			                       options, argumentNames, setterDelegate);
 		}
 	}
 }

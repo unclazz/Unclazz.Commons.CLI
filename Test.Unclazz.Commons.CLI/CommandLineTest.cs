@@ -21,8 +21,8 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 			                     .SetterDelegate(ss => vs = ss.ToList())
-			                     .AddOption("/f")
-			                     .SetterDelegate(()=> v0 = true)
+			                     .AddOption(Option.Builder("/f")
+			                     	.SetterDelegate(()=> v0 = true).Build())
 			                     .Build();
 
 			// Act
@@ -43,9 +43,9 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			cl0.Parse(Arguments("/f", "/b", "baz"));
@@ -65,9 +65,9 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
-								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                     .AddOption(Option.Builder("/f")
+								 	.SetterDelegate((string s) => v0 = s).Build())
+			                     .Build();
 
 			// Act
 			cl0.Parse(Arguments("/b", "/f", "baz"));
@@ -87,9 +87,9 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
-								 .SetterDelegate((int s) => v0 = s)
-								 .Build();
+								 .AddOption(Option.Builder("/f")
+			                                .SetterDelegate((int s) => v0 = s).Build())
+			                     .Build();
 
 			// Act
 			// Assert
@@ -107,10 +107,10 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 			                     .HasArgument()
 								 .SetterDelegate(() => v0 = true)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			cl0.Parse(Arguments("/f", "bar", "baz"));
@@ -129,10 +129,10 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 			                     .HasArgument()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			cl0.Parse(Arguments("/f", "bar", "baz"));
@@ -151,11 +151,11 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .HasArgument()
 								 .Required()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			cl0.Parse(Arguments("/f", "bar", "baz"));
@@ -174,11 +174,11 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .HasArgument()
 			                     .Required()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			// Assert
@@ -196,11 +196,11 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .HasArgument()
 			                     .Multiple()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			cl0.Parse(Arguments("abc", "/f", "bar", "/f", "baz", "123"));
@@ -218,11 +218,11 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .HasArgument()
 								 .Multiple()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			cl0.Parse(Arguments("foo", "bar", "baz"));
@@ -240,12 +240,12 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .HasArgument()
 			                     .Required()
 								 .Multiple()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			// Act
 			// Assert
@@ -263,12 +263,12 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 			                     .SettingName("Test.Foo")
 								 .HasArgument()
 								 .Required()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 			var dict = new Dictionary<string, string>();
 			dict.Add("Test.Foo", "BAR");
 
@@ -288,12 +288,12 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .SettingName("Test.Foo")
 								 .HasArgument()
 								 .Required()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			var dict = new Dictionary<string, string>();
 			dict.Add("Test.Foo", "BAR");
@@ -314,12 +314,12 @@ namespace Test.Unclazz.Commons.CLI
 			IList<string> vs = null;
 			var cl0 = CommandLine.Builder("test.exe")
 								 .SetterDelegate(ss => vs = ss.ToList())
-								 .AddOption("/f")
+								 .AddOption(Option.Builder("/f")
 								 .SettingName("Test.Foo")
 								 .HasArgument()
 								 .Required()
 								 .SetterDelegate((string s) => v0 = s)
-								 .Build();
+			                                .Build()).Build();
 
 			var dict = new Dictionary<string, string>();
 			dict.Add("Test.Bar", "BAR");

@@ -1,19 +1,25 @@
 ﻿using System;
 namespace Unclazz.Commons.CLI
 {
-	class Option : IOption
+	public class Option : IOption
 	{
+		public static OptionBuilder Builder(string name)
+		{
+			return new OptionBuilder(name);
+		}
+		
 		public string Name { get; }
 		public string AlternativeName { get; }
 		public string SettingName { get; }
 		public bool Required { get; }
 		public bool HasArgument { get; }
+		public string ArgumentName { get; }
 		public bool Multiple { get; }
 		public string Description { get; }
 		public Action<string> SetterDelegate { get; }
 
-		internal Option(string n, string an, string sn, bool r, bool ha, bool m,
-		                string d, Action<string> sd)
+		internal Option(string n, string an, string sn, bool r, bool ha, string agn,
+		                bool m, string d, Action<string> sd)
 		{
 			if (IsNullOrEmpty(n) && IsNullOrEmpty(an))
 			{
@@ -29,6 +35,7 @@ namespace Unclazz.Commons.CLI
 			SettingName = sn == null ? string.Empty : sn;
 			Required = r;
 			HasArgument = ha;
+			ArgumentName = agn == null ? string.Empty : agn;
 			Multiple = m;
 			Description = d;
 			SetterDelegate = sd;

@@ -14,12 +14,12 @@ namespace Test.Unclazz.Commons.CLI
 			// Arrange
 			var b = CommandLine.Builder("test.exe")
 							   .CaseSensitive()
-							   .AddOption("foo")
+							   .AddOption(Option.Builder("foo")
 							   .HasArgument()
-							   .Required()
-							   .AndOption("bar")
-							   .HasArgument()
-							   .AndOption("baz");
+			                              .Required().Build())
+							   .AddOption(Option.Builder("bar")
+			                              .HasArgument().Build())
+			                   .AddOption(Option.Builder("baz").Build());
 
 			// Act
 			ICommandLine cl = b.Build();
@@ -52,11 +52,11 @@ namespace Test.Unclazz.Commons.CLI
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
 							   .CaseSensitive()
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo").Build());
 			var b1 = CommandLine.Builder("test.exe")
 			                    .Description("test command")
 							   .CaseSensitive()
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo").Build());
 
 			// Act
 			ICommandLine cl0 = b0.Build();
@@ -73,13 +73,13 @@ namespace Test.Unclazz.Commons.CLI
 			// Arrange
 			var b0 = CommandLine.Builder("test.exe")
 							   .CaseSensitive(false)
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 			var b1 = CommandLine.Builder("test.exe")
 							   .CaseSensitive(true)
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 			var b2 = CommandLine.Builder("test.exe")
 							   .CaseSensitive()
-								.AddOption("foo");
+			                    .AddOption(Option.Builder("foo"));
 
 			// Act
 			ICommandLine cl0 = b0.Build();

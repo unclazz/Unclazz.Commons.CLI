@@ -15,6 +15,7 @@ namespace Unclazz.Commons.CLI
 		string CommandName { get; }
 		/// <summary>
 		/// コマンドの説明です。
+		/// 説明はヘルプの出力に使用されます。
 		/// </summary>
 		/// <value>コマンドの説明</value>
 		string Description { get; }
@@ -35,6 +36,13 @@ namespace Unclazz.Commons.CLI
 		/// </summary>
 		/// <value>「残りの引数」のためのデリゲート</value>
 		Action<IEnumerable<string>> SetterDelegate { get; }
+		/// <summary>
+		/// コマンドライン引数のうちコマンドライン・オプションの定義情報に
+		/// 含まれなかった「残りの引数」の名前のシーケンス。
+		/// これらの名前はヘルプの出力に使用されます。
+		/// </summary>
+		/// <value>「残りの引数」の名前のシーケンス</value>
+		IEnumerable<string> ArgumentNames { get; }
 		/// <summary>
 		/// コマンドライン引数をパースします。
 		/// アプリケーション構成ファイルの設定情報がフォールバックとして利用されます。

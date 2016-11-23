@@ -35,12 +35,19 @@ namespace Unclazz.Commons.CLI
 		/// <value><c>true</c>の場合は引数をとる</value>
 		bool HasArgument { get; }
 		/// <summary>
+		/// このオプションの引数名を返します。
+		/// 引数名はヘルプの出力に使用されます。
+		/// </summary>
+		/// <value>オプションの引数名</value>
+		string ArgumentName { get; }
+		/// <summary>
 		/// このオプションが複数回指定できるかどうかを示す値を返します。
 		/// </summary>
 		/// <value><c>true</c>の場合は複数回指定ができる</value>
 		bool Multiple { get; }
 		/// <summary>
 		/// このオプションの説明です。
+		/// 説明はヘルプの出力に使用されます。
 		/// </summary>
 		/// <value>オプションの説明</value>
 		string Description { get; }
