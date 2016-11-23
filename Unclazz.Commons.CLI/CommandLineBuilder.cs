@@ -10,7 +10,7 @@ namespace Unclazz.Commons.CLI
 		private readonly string commandName = string.Empty;
 		private string description = string.Empty;
 		private bool caseSensitive = true;
-		private IList<IOption> options = new List<IOption>();
+		private ISet<IOption> options = new HashSet<IOption>();
 		private Action<IEnumerable<string>> setterDelegate = noop;
 
 		internal CommandLineBuilder(string cn)
