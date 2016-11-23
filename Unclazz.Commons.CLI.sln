@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unclazz.Commons.CLI", "Unclazz.Commons.CLI\Unclazz.Commons.CLI.csproj", "{50041BC1-6A25-4642-9844-D88C660F0D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unclazz.Commons.CLI.Sample", "Unclazz.Commons.CLI.Sample\Unclazz.Commons.CLI.Sample.csproj", "{A497F7DF-A172-4D1B-8E97-DEED8DC2A398}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Unclazz.Commons.CLI", "Test.Unclazz.Commons.CLI\Test.Unclazz.Commons.CLI.csproj", "{3A0137BD-1D8C-467D-9EB9-5D19D737E783}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50041BC1-6A25-4642-9844-D88C660F0D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50041BC1-6A25-4642-9844-D88C660F0D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50041BC1-6A25-4642-9844-D88C660F0D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50041BC1-6A25-4642-9844-D88C660F0D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A497F7DF-A172-4D1B-8E97-DEED8DC2A398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A497F7DF-A172-4D1B-8E97-DEED8DC2A398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A497F7DF-A172-4D1B-8E97-DEED8DC2A398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A497F7DF-A172-4D1B-8E97-DEED8DC2A398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A0137BD-1D8C-467D-9EB9-5D19D737E783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A0137BD-1D8C-467D-9EB9-5D19D737E783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A0137BD-1D8C-467D-9EB9-5D19D737E783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A0137BD-1D8C-467D-9EB9-5D19D737E783}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
