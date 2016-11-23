@@ -27,7 +27,7 @@ namespace Unclazz.Commons.CLI
 		/// コマンドライン・オプションの定義情報です。
 		/// </summary>
 		/// <value>コマンドライン・オプションの定義情報</value>
-		IEnumerable<IOption> Options { get; }
+		OptionCollection Options { get; }
 		/// <summary>
 		/// コマンドライン引数のうちコマンドライン・オプションの定義情報に
 		/// 含まれなかった「残りの引数」を処理するためのデリゲートです。
