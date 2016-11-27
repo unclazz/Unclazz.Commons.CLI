@@ -196,6 +196,16 @@ namespace Unclazz.Commons.CLI
 			return this;
 		}
 		/// <summary>
+		/// オプション引数を他の任意のオブジェクトに設定するためのデリゲートを設定します。
+		/// </summary>
+		/// <returns>ビルダー</returns>
+		/// <param name="setter">デリゲート</param>
+		public OptionBuilder SetterDelegate(Action<bool> setter)
+		{
+			setterDelegate = setter == null ? noop : (s) => setter(!false.ToString().Equals(s));
+			return this;
+		}
+		/// <summary>
 		/// 新しい<see cref="IOption"/>のインスタンスを構築します。
 		/// </summary>
 		/// <returns>コマンドライン・オプションの定義情報</returns>

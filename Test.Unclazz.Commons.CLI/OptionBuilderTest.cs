@@ -181,6 +181,10 @@ namespace Test.Unclazz.Commons.CLI
 			var b3 = CommandLine.Builder("test.exe")
 								.AddOption(Option.Builder("foo")
 			                               .SetterDelegate(() => bl3 = true));
+			bool bl4 = false;
+			var b4 = CommandLine.Builder("test.exe")
+								.AddOption(Option.Builder("foo")
+										   .SetterDelegate((bool b) => bl4 = b));
 
 			// Act
 			var cl0 = b0.Build();
@@ -191,12 +195,21 @@ namespace Test.Unclazz.Commons.CLI
 			cl2.Options["foo"].SetterDelegate("123.456");
 			var cl3 = b3.Build();
 			cl3.Options["foo"].SetterDelegate("bar");
+			var cl4 = b4.Build();
+			cl4.Options["foo"].SetterDelegate(string.Empty);
 
 			// Assert
 			Assert.That(s0, Is.EqualTo("bar"));
 			Assert.That(i1, Is.EqualTo(123));
 			Assert.That(d2, Is.EqualTo(123.456));
 			Assert.That(bl3, Is.EqualTo(true));
+			Assert.That(bl4, Is.EqualTo(true));
+
+			// Act & Assert #2
+			cl4.Options["foo"].SetterDelegate(true.ToString());
+			Assert.That(bl4, Is.EqualTo(true));
+			cl4.Options["foo"].SetterDelegate(false.ToString());
+			Assert.That(bl4, Is.EqualTo(false));
 		}
 	}
 }

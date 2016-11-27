@@ -58,7 +58,58 @@ namespace Test.Unclazz.Commons.CLI
 		}
 
 		[Test()]
-		public void Parse_Flag_DotDependsOnOrder()
+		public void Parse_Flag_DelegateHasAnArgument_Case2()
+		{
+			// Arrange
+			bool v0 = false;
+			IList<string> vs = null;
+			var cl0 = CommandLine.Builder("test.exe")
+								 .SetterDelegate(ss => vs = ss.ToList())
+								 .AddOption(Option.Builder("/f")
+			                                .SettingName("Foo")
+								 			.SetterDelegate((bool v) => v0 = v)
+			                                .Required()
+											.Build()).Build();
+			var dict = new Dictionary<string, string>();
+
+			// Act & Assert #1
+			dict["Foo"] = true.ToString();
+			cl0.Parse(Arguments("/b", "baz"), dict);
+			Assert.That(v0, Is.EqualTo(true));
+
+			// Act & Assert #2
+			v0 = true;
+			dict["Foo"] = false.ToString();
+			cl0.Parse(Arguments("/b", "baz"), dict);
+			Assert.That(v0, Is.EqualTo(false));
+
+			// Act & Assert #3
+			v0 = true;
+			dict["Foo"] = "NO";
+			cl0.Parse(Arguments("/b", "baz"), dict);
+			Assert.That(v0, Is.EqualTo(false));
+
+			// Act & Assert #4
+			v0 = true;
+			dict["Foo"] = "0";
+			cl0.Parse(Arguments("/b", "baz"), dict);
+			Assert.That(v0, Is.EqualTo(false));
+
+			// Act & Assert #5
+			v0 = true;
+			dict["Foo"] = "N";
+			cl0.Parse(Arguments("/b", "baz"), dict);
+			Assert.That(v0, Is.EqualTo(false));
+
+			// Act & Assert #6
+			v0 = true;
+			dict["Foo"] = "F";
+			cl0.Parse(Arguments("/b", "baz"), dict);
+			Assert.That(v0, Is.EqualTo(false));
+		}
+
+		[Test()]
+		public void Parse_Flag_DontDependsOnOrder()
 		{
 			// Arrange
 			string v0 = null;

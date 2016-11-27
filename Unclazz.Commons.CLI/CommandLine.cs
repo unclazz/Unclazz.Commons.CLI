@@ -176,7 +176,15 @@ namespace Unclazz.Commons.CLI
 					else {
 						// 引数をとるものでない場合
 						// 解決した値を辞書エントリーの値にダミー値を追加
-						opt.Value.Add(string.Empty);
+						var upper = item.Value.ToUpper();
+						if (upper.Equals("FALSE") || upper.Equals("NO") ||
+						upper.Equals("0") || upper.Equals("F") || upper.Equals("N"))
+						{
+							opt.Value.Add(false.ToString());
+						}
+						else {
+							opt.Value.Add(true.ToString());
+						}
 					}
 				}
 			}
@@ -282,7 +290,22 @@ namespace Unclazz.Commons.CLI
 			try
 			{
 				// オプション定義に登録されたデリゲートを呼び出す
-				nameMatched.SetterDelegate(nameMatched.HasArgument ? value : string.Empty);
+				if (nameMatched.HasArgument)
+				{
+					nameMatched.SetterDelegate(value);
+				}
+				else {
+					var upper = value.ToString().ToUpper();
+					if (upper.Equals("FALSE") || upper.Equals("NO") || 
+					    upper.Equals("0") || upper.Equals("F") || upper.Equals("N"))
+					{
+						nameMatched.SetterDelegate(false.ToString());
+					}
+					else {
+						nameMatched.SetterDelegate(true.ToString());
+					}
+				}
+
 				// 値解決は成功したものとしてtrueを返す
 				return true;
 			}
