@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Unclazz.Commons.CLI</id><!--id>$id$</id-->
-    <version>1.1.0.0</version><!--version>$version$</version-->
+    <version>2.0.0.0</version><!--version>$version$</version-->
     <!--title>$title$</title-->
     <authors>unclazz.org</authors><!--authors>$author$</authors-->
     <!--owners>$author$</owners-->
@@ -16,6 +16,7 @@
     <!--tags>Tag1 Tag2</tags-->
   </metadata>
   <files>
+    <file src="bin/Release/net40/Unclazz.Commons.CLI.dll" target="lib/net40"/>
     <file src="bin/Release/net45/Unclazz.Commons.CLI.dll" target="lib/net45"/>
   </files>
 </package>
