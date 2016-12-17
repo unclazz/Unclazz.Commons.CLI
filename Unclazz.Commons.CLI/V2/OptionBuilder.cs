@@ -1,6 +1,9 @@
 ﻿using System;
 namespace Unclazz.Commons.CLI
 {
+	/// <summary>
+	/// コマンドライン・オプションの定義を組み立てるビルダーです。
+	/// </summary>
 	public class OptionBuilder<T>
 	{
 		private static readonly Action<T, string> noop = (o, s) => { };

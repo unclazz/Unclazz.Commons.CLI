@@ -10,11 +10,11 @@ namespace Test.Unclazz.Commons.CLI
 		public void Description_SetDescriptionOfOption()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b0 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Description("foo is foo"));
-			var b1 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b1 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Description(null));
 
 			// Act
@@ -30,16 +30,16 @@ namespace Test.Unclazz.Commons.CLI
 		public void HasArgument_SetHasArgumentOfOption()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
-			                    .AddOption(Option.Builder("foo"));
-			var b1 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b0 = CommandLine.Builder<object>("test.exe")
+			                    .AddOption(Option.Builder<object>("foo"));
+			var b1 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .HasArgument(true));
-			var b2 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b2 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .HasArgument());
-			var b3 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b3 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .HasArgument(false));
 
 			// Act
@@ -59,16 +59,16 @@ namespace Test.Unclazz.Commons.CLI
 		public void Required_SetRequiredOfOption()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
-			                    .AddOption(Option.Builder("foo"));
-			var b1 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b0 = CommandLine.Builder<object>("test.exe")
+			                    .AddOption(Option.Builder<object>("foo"));
+			var b1 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Required(true));
-			var b2 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b2 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Required());
-			var b3 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b3 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Required(false));
 
 			// Act
@@ -88,16 +88,16 @@ namespace Test.Unclazz.Commons.CLI
 		public void Multiple_SetMultipleOfOption()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
-			                    .AddOption(Option.Builder("foo"));
-			var b1 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b0 = CommandLine.Builder<object>("test.exe")
+			                    .AddOption(Option.Builder<object>("foo"));
+			var b1 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Multiple(true));
-			var b2 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b2 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Multiple());
-			var b3 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b3 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .Multiple(false));
 
 			// Act
@@ -117,13 +117,13 @@ namespace Test.Unclazz.Commons.CLI
 		public void AlternativeName_SetAlternativeNameOfOption()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
-			                    .AddOption(Option.Builder("foo"));
-			var b1 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b0 = CommandLine.Builder<object>("test.exe")
+			                    .AddOption(Option.Builder<object>("foo"));
+			var b1 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .AlternativeName("altFoo"));
-			var b2 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b2 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .AlternativeName(null));
 
 			// Act
@@ -141,13 +141,13 @@ namespace Test.Unclazz.Commons.CLI
 		public void SettingName_SetSettingNameOfOption()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
-			                    .AddOption(Option.Builder("foo"));
-			var b1 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b0 = CommandLine.Builder<object>("test.exe")
+			                    .AddOption(Option.Builder<object>("foo"));
+			var b1 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .SettingName("altFoo"));
-			var b2 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
+			var b2 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
 			                               .SettingName(null));
 
 			// Act
@@ -166,37 +166,37 @@ namespace Test.Unclazz.Commons.CLI
 		{
 			// Arrange
 			string s0 = null;
-			var b0 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
-			                               .SetterDelegate((s) => s0 = s));
+			var b0 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
+			                               .SetterDelegate((object o, string s) => s0 = s));
 			int i1 = 0;
-			var b1 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
-			                               .SetterDelegate((int i) => i1 = i));
+			var b1 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
+			                               .SetterDelegate((object o, int i) => i1 = i));
 			double d2 = 0.0;
-			var b2 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
-			                               .SetterDelegate((double d) => d2 = d));
+			var b2 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
+			                               .SetterDelegate((object o, double d) => d2 = d));
 			bool bl3 = false;
-			var b3 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
-			                               .SetterDelegate(() => bl3 = true));
+			var b3 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
+			                               .SetterDelegate((object o) => bl3 = true));
 			bool bl4 = false;
-			var b4 = CommandLine.Builder("test.exe")
-								.AddOption(Option.Builder("foo")
-										   .SetterDelegate((bool b) => bl4 = b));
+			var b4 = CommandLine.Builder<object>("test.exe")
+								.AddOption(Option.Builder<object>("foo")
+										   .SetterDelegate((object o, bool b) => bl4 = b));
 
 			// Act
 			var cl0 = b0.Build();
-			cl0.Options["foo"].SetterDelegate("bar");
+			cl0.Options["foo"].SetterDelegate(null, "bar");
 			var cl1 = b1.Build();
-			cl1.Options["foo"].SetterDelegate("123");
+			cl1.Options["foo"].SetterDelegate(null, "123");
 			var cl2 = b2.Build();
-			cl2.Options["foo"].SetterDelegate("123.456");
+			cl2.Options["foo"].SetterDelegate(null, "123.456");
 			var cl3 = b3.Build();
-			cl3.Options["foo"].SetterDelegate("bar");
+			cl3.Options["foo"].SetterDelegate(null, "bar");
 			var cl4 = b4.Build();
-			cl4.Options["foo"].SetterDelegate(string.Empty);
+			cl4.Options["foo"].SetterDelegate(null, string.Empty);
 
 			// Assert
 			Assert.That(s0, Is.EqualTo("bar"));
@@ -206,9 +206,9 @@ namespace Test.Unclazz.Commons.CLI
 			Assert.That(bl4, Is.EqualTo(true));
 
 			// Act & Assert #2
-			cl4.Options["foo"].SetterDelegate(true.ToString());
+			cl4.Options["foo"].SetterDelegate(null, true.ToString());
 			Assert.That(bl4, Is.EqualTo(true));
-			cl4.Options["foo"].SetterDelegate(false.ToString());
+			cl4.Options["foo"].SetterDelegate(null, false.ToString());
 			Assert.That(bl4, Is.EqualTo(false));
 		}
 	}

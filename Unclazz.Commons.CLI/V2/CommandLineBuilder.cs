@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace Unclazz.Commons.CLI
 {
+	/// <summary>
+	/// コマンドラインの定義を組み立てるビルダーです。
+	/// ビルダーのインスタンスは<see cref="CommandLine.Builder(string)"/>メソッドを通じて得られます。
+	/// </summary>
 	public class CommandLineBuilder<T>
 	{
 		private static readonly Action<T, IEnumerable<string>> noop = (o, ss) => { };

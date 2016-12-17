@@ -2,15 +2,15 @@
 namespace Unclazz.Commons.CLI
 {
 	/// <summary>
-	/// <see cref="IOption&lt;T&gt;"/>を実装したクラスです。
+	/// <see cref="IOption&lt;T&gt;"/>インターフェースのためのユーティリティです。
 	/// </summary>
-	public class Option<T> : IOption<T>
+	public class Option
 	{
 		/// <summary>
 		/// 新しいビルダーを生成します。
 		/// </summary>
 		/// <param name="name">コマンドライン・オプションの名前</param>
-		public static OptionBuilder<T> Builder(string name)
+		public static OptionBuilder<T> Builder<T>(string name)
 		{
 			if (name == null)
 			{
@@ -18,7 +18,13 @@ namespace Unclazz.Commons.CLI
 			}
 			return new OptionBuilder<T>(name);
 		}
+	}
 
+	/// <summary>
+	/// <see cref="IOption&lt;T&gt;"/>を実装したクラスです。
+	/// </summary>
+	internal class Option<T> : IOption<T>
+	{
 		public string Name { get; }
 		public string AlternativeName { get; }
 		public string SettingName { get; }
@@ -63,7 +69,7 @@ namespace Unclazz.Commons.CLI
 		}
 		public override bool Equals(object obj)
 		{
-			var other = obj as IOption;
+			var other = obj as IOption<T>;
 			if (other == null)
 			{
 				return false;

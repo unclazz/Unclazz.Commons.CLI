@@ -1,7 +1,10 @@
 ﻿using System;
 namespace Unclazz.Commons.CLI
 {
-	public interface IOption<T>
+	/// <summary>
+	/// コマンドライン・オプションの定義情報を表わすインターフェースです。
+	/// </summary>
+	public interface IOption
 	{
 		/// <summary>
 		/// オプション名です。
@@ -48,6 +51,13 @@ namespace Unclazz.Commons.CLI
 		/// </summary>
 		/// <value>オプションの説明</value>
 		string Description { get; }
+	}
+
+	/// <summary>
+	/// コマンドライン・オプションの定義情報を表わすインターフェースです。
+	/// </summary>
+	public interface IOption<T> : IOption
+	{
 		/// <summary>
 		/// オプションの引数を任意のオブジェクトに設定するためのデリゲートです。
 		/// デフォルト値として利用されているデリゲートは受け取った値を単に破棄します。

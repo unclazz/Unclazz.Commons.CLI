@@ -35,6 +35,7 @@
     <Compile Include="CommandLineBuilderTest.cs" />
     <Compile Include="OptionBuilderTest.cs" />
     <Compile Include="CommandLineTest.cs" />
+    <Compile Include="ParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unclazz.Commons.CLI\Unclazz.Commons.CLI.csproj">

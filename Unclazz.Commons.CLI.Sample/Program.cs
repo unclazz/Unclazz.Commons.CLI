@@ -6,8 +6,7 @@ namespace Unclazz.Commons.CLI.Sample
 	{
 		public static void Main(string[] args)
 		{
-			var ps = new Parameters();
-			var b = CommandLine.Builder("TACRPC.EXE");
+			var b = CommandLine.Builder<Parameters>("TACRPC.EXE");
 
 			// コマンドライン全体に関わる設定
 			b.Description("TAC(Talend Administration Center)のRPCインターフェースである" +
@@ -15,57 +14,58 @@ namespace Unclazz.Commons.CLI.Sample
 			 .CaseSensitive(false);
 
 			// Jオプション
-			b.AddOption(Option.Builder("/J")
+			b.AddOption(Option.Builder<Parameters>("/J")
 				.AlternativeName("/JSON")
 				.ArgumentName("json-file")
 				.Description("RPCリクエストを表わすJSONが記述されたファイルのパス.")
 				.HasArgument()
 				.Required()
-				.SetterDelegate((string s) => ps.RequestJson = s));
+				.SetterDelegate((vo, s) => vo.RequestJson = s));
 
 			// H, P, Qオプション
-			b.AddOption(Option.Builder("/H")
+			b.AddOption(Option.Builder<Parameters>("/H")
 				.AlternativeName("/HOST")
 				.ArgumentName("host")
 				.Description("RPCリクエスト先のホスト名. デフォルトは\"localhost\".")
 				.HasArgument()
-				.SetterDelegate((string s) => ps.RemoteHost = s))
-			.AddOption(Option.Builder("/P")
+			    .SetterDelegate((vo, s) => vo.RemoteHost = s))
+			.AddOption(Option.Builder<Parameters>("/P")
 				.AlternativeName("/PORT")
 				.ArgumentName("port")
 				.Description("RPCリクエスト先のポート名. デフォルトは8080.")
 				.HasArgument()
-				.SetterDelegate((int i) => ps.RemotePort = i))
-			.AddOption(Option.Builder("/Q")
+				.SetterDelegate((vo, i) => vo.RemotePort = i))
+			.AddOption(Option.Builder<Parameters>("/Q")
 				.AlternativeName("/PATH")
 				.ArgumentName("path")
 				.Description("RPCリクエスト先のパス名. デフォルトは" +
 				"\"/org.talend.administrator/metaServlet\".")
 				.HasArgument()
-				.SetterDelegate((string s) => ps.RemotePath = s));
+				.SetterDelegate((vo, s) => vo.RemotePath = s));
 
 			// Tオプション
-			b.AddOption(Option.Builder("/T")
+			b.AddOption(Option.Builder<Parameters>("/T")
 				.AlternativeName("/TIMEOUT")
 				.ArgumentName("timeout")
 				.Description("RPCリクエストのタイムアウト時間. 単位はミリ秒. デフォルトは100000.")
 				.HasArgument()
-				.SetterDelegate((int i) => ps.RemotePort = i));
+				.SetterDelegate((vo, i) => vo.RemotePort = i));
 
 			// Dオプション（フラグ）
-			b.AddOption(Option.Builder("/D")
+			b.AddOption(Option.Builder<Parameters>("/D")
 				.AlternativeName("/DUMP")
 				.Description("リクエストとレスポンスのダンプ出力を行う.")
-				.SetterDelegate(() => ps.ShowDump = true));
+				.SetterDelegate(vo => vo.ShowDump = true));
 
 			// コマンドライン定義を構築
 			var cmdln = b.Build();
 
 			// ヘルプを表示
-			Console.WriteLine(new HelpFormatter().Format(cmdln));
+			Console.WriteLine(new HelpFormatter<Parameters>().Format(cmdln));
 
 			// コマンドラインをパース
-			cmdln.Parse(new string[] { "/j", "path/to/json", "/d", "/p", "8888" });
+			var ps = cmdln.GetParser(new Parameters())
+			              .Parse(new string[] { "/j", "path/to/json", "/d", "/p", "8888" });
 
 			Console.WriteLine("ps.RequestJson = {0}", ps.RequestJson);
 			Console.WriteLine("ps.RemotePort  = {0}", ps.RemotePort);

@@ -12,17 +12,17 @@ namespace Test.Unclazz.Commons.CLI
 		public void Build_ReturnsNewInstanceOfICommandLine()
 		{
 			// Arrange
-			var b = CommandLine.Builder("test.exe")
+			var b = CommandLine.Builder<object>("test.exe")
 							   .CaseSensitive()
-							   .AddOption(Option.Builder("foo")
+			                   .AddOption(Option.Builder<object>("foo")
 							   .HasArgument()
 			                              .Required().Build())
-							   .AddOption(Option.Builder("bar")
+							   .AddOption(Option.Builder<object>("bar")
 			                              .HasArgument().Build())
-			                   .AddOption(Option.Builder("baz").Build());
+			                   .AddOption(Option.Builder<object>("baz").Build());
 
 			// Act
-			ICommandLine cl = b.Build();
+			ICommandLine<object> cl = b.Build();
 
 			// Assert
 			Assert.True(cl.Options.All(o =>
@@ -35,7 +35,7 @@ namespace Test.Unclazz.Commons.CLI
 		public void Build_WhenNoOptionSpecified_ReturnsNewInstanceOfICommandLine()
 		{
 			// Arrange
-			var b = CommandLine.Builder("test.exe")
+			var b = CommandLine.Builder<object>("test.exe")
 							   .CaseSensitive();
 
 			// Act
@@ -50,17 +50,17 @@ namespace Test.Unclazz.Commons.CLI
 		public void Description_SetDescriptionOfCommandLine()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
+			var b0 = CommandLine.Builder<object>("test.exe")
 							   .CaseSensitive()
-			                    .AddOption(Option.Builder("foo").Build());
-			var b1 = CommandLine.Builder("test.exe")
+			                    .AddOption(Option.Builder<object>("foo").Build());
+			var b1 = CommandLine.Builder<object>("test.exe")
 			                    .Description("test command")
 							   .CaseSensitive()
-			                    .AddOption(Option.Builder("foo").Build());
+			                    .AddOption(Option.Builder<object>("foo").Build());
 
 			// Act
-			ICommandLine cl0 = b0.Build();
-			ICommandLine cl1 = b1.Build();
+			ICommandLine<object> cl0 = b0.Build();
+			ICommandLine<object> cl1 = b1.Build();
 
 			// Assert
 			Assert.That(cl0.Description, Is.EqualTo(string.Empty));
@@ -71,20 +71,20 @@ namespace Test.Unclazz.Commons.CLI
 		public void CaseSensitive_SetCaseSensitiveOfCommandLine()
 		{
 			// Arrange
-			var b0 = CommandLine.Builder("test.exe")
+			var b0 = CommandLine.Builder<object>("test.exe")
 							   .CaseSensitive(false)
-			                    .AddOption(Option.Builder("foo"));
-			var b1 = CommandLine.Builder("test.exe")
+			                    .AddOption(Option.Builder<object>("foo"));
+			var b1 = CommandLine.Builder<object>("test.exe")
 							   .CaseSensitive(true)
-			                    .AddOption(Option.Builder("foo"));
-			var b2 = CommandLine.Builder("test.exe")
+			                    .AddOption(Option.Builder<object>("foo"));
+			var b2 = CommandLine.Builder<object>("test.exe")
 							   .CaseSensitive()
-			                    .AddOption(Option.Builder("foo"));
+			                    .AddOption(Option.Builder<object>("foo"));
 
 			// Act
-			ICommandLine cl0 = b0.Build();
-			ICommandLine cl1 = b1.Build();
-			ICommandLine cl2 = b2.Build();
+			ICommandLine<object> cl0 = b0.Build();
+			ICommandLine<object> cl1 = b1.Build();
+			ICommandLine<object> cl2 = b2.Build();
 
 			// Assert
 			Assert.False(cl0.CaseSensitive);

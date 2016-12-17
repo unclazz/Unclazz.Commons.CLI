@@ -7,30 +7,43 @@ namespace Unclazz.Commons.CLI
 	class Parser<T> : IParser<T>
 	{
 		private readonly ICommandLine<T> cl;
-		private readonly T vo;
+		private readonly Func<T> supplier;
+
+		internal Parser(ICommandLine<T> commandLine, Func<T> valueObjectSupplier)
+		{
+			cl = commandLine;
+			supplier = valueObjectSupplier;
+		}
+
+		internal Parser(ICommandLine<T> commandLine)
+		{
+			cl = commandLine;
+			supplier = Activator.CreateInstance<T>;
+		}
+
 		internal Parser(ICommandLine<T> commandLine, T valueObject)
 		{
 			cl = commandLine;
-			vo = valueObject;
+			supplier = () => valueObject;
 		}
 
 		public T Parse(IEnumerable<string> arguments)
 		{
-			Parse(arguments, LoadSettings());
-			return vo;
+			return Parse(arguments, LoadSettings());
 		}
 
 		public T Parse(IEnumerable<string> arguments, IDictionary<string, string> settings)
 		{
 			try
 			{
-				ResolveOptions(arguments, settings);
+				var vo = supplier();
+				ResolveOptions(arguments, settings, vo);
 				return vo;
 			}
 			catch (Exception ex)
 			{
-				throw new ParseException
-				(ParseException.ExceptionCategory.UnexpectedErrorHasOccurred,
+				throw MakeParseException
+				(ParseExceptionCategory.UnexpectedErrorHasOccurred,
 				 null, null, ex);
 			}
 		}
@@ -61,7 +74,7 @@ namespace Unclazz.Commons.CLI
 		/// </summary>
 		/// <param name="rawArgs">コマンドライン引数</param>
 		/// <param name="settings">アプリケーション構成ファイルの設定情報</param>
-		void ResolveOptions(IEnumerable<string> rawArgs, IDictionary<string, string> settings)
+		void ResolveOptions(IEnumerable<string> rawArgs, IDictionary<string, string> settings, T vo)
 		{
 			// 1. コマンドライン引数の処理（前段階）
 
@@ -91,7 +104,7 @@ namespace Unclazz.Commons.CLI
 							 ? string.Empty : toArgResolve.Peek();
 
 				// 値解決を試みる
-				var result = ResolveOptionsWithArguments(former, latter, ctx);
+				var result = ResolveOptionsWithArguments(former, latter, ctx, vo);
 				// 解決の成否をチェック
 				if (result)
 				{
@@ -127,7 +140,7 @@ namespace Unclazz.Commons.CLI
 			foreach (var item in settings)
 			{
 				// 値解決を試みる
-				var result = ResolveOptionsWithAppSettings(item.Key, item.Value, ctx);
+				var result = ResolveOptionsWithAppSettings(item.Key, item.Value, ctx, vo);
 				// 成否をチェック
 				if (result)
 				{
@@ -185,7 +198,7 @@ namespace Unclazz.Commons.CLI
 		/// <param name="latter">2つ目のコマンドライン引数</param>
 		/// <param name="ctx">値解決状況を記録した辞書</param>
 		bool ResolveOptionsWithArguments(string former, string latter,
-			 Dictionary<IOption<T>, List<string>> ctx)
+			 Dictionary<IOption<T>, List<string>> ctx, T vo)
 		{
 			// オプション定義うちで名前もしくは別名が一致するものを検索
 			var nameMatched = cl.Options
@@ -234,7 +247,7 @@ namespace Unclazz.Commons.CLI
 		/// <param name="value">設定情報の値</param>
 		/// <param name="ctx">値解決状況を記録した辞書</param>
 		bool ResolveOptionsWithAppSettings(string key, string value,
-			 Dictionary<IOption<T>, List<string>> ctx)
+			 Dictionary<IOption<T>, List<string>> ctx, T vo)
 		{
 			// オプション定義うちでキー名が該当するものを検索
 			var nameMatched = cl.Options
@@ -296,18 +309,18 @@ namespace Unclazz.Commons.CLI
 			return r;
 		}
 
-		ParseException<T> MakeParseException(
+		ParseException MakeParseException(
 			ParseExceptionCategory c,
 			IOption<T> to, string tv, Exception e)
 		{
-			return new ParseException<T>(c, to, tv, e);
+			return new ParseException(c, to, tv, e);
 		}
 
-		ParseException<T> MakeParseException(
+		ParseException MakeParseException(
 			ParseExceptionCategory c,
 			IOption<T> to, string tv)
 		{
-			return new ParseException<T>(c, to, tv);
+			return new ParseException(c, to, tv);
 		}
 	}
 }

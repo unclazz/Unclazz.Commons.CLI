@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Unclazz.Commons.CLI
 {
+	/// <summary>
+	/// コマンドラインの定義情報を表わすインターフェースです。
+	/// </summary>
 	public interface ICommandLine<T>
 	{
 		/// <summary>
@@ -46,5 +49,7 @@ namespace Unclazz.Commons.CLI
 		/// <returns>パーサ</returns>
 		/// <param name="valueObject">パースした結果の値が設定されるバリュー・オブジェクト</param>
 		IParser<T> GetParser(T valueObject);
+		IParser<T> GetParser(Func<T> valueObjectSupplier);
+		IParser<T> GetParser();
 	}
 }
