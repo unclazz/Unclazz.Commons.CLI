@@ -6,6 +6,7 @@ namespace Unclazz.Commons.CLI.Sample
 	{
 		public static void Main(string[] args)
 		{
+			// ビルダーを作成
 			var b = CommandLine.Builder<Parameters>("TACRPC.EXE");
 
 			// コマンドライン全体に関わる設定
@@ -58,14 +59,15 @@ namespace Unclazz.Commons.CLI.Sample
 				.SetterDelegate(vo => vo.ShowDump = true));
 
 			// コマンドライン定義を構築
-			var cmdln = b.Build();
+			var cl = b.Build();
 
 			// ヘルプを表示
-			Console.WriteLine(new HelpFormatter<Parameters>().Format(cmdln));
+			Console.WriteLine(new HelpFormatter<Parameters>().Format(cl));
 
 			// コマンドラインをパース
-			var ps = cmdln.GetParser(new Parameters())
-			              .Parse(new string[] { "/j", "path/to/json", "/d", "/p", "8888" });
+			var ps = cl
+				.GetParser()
+				.Parse(new string[] { "/j", "path/to/json", "/d", "/p", "8888" });
 
 			Console.WriteLine("ps.RequestJson = {0}", ps.RequestJson);
 			Console.WriteLine("ps.RemotePort  = {0}", ps.RemotePort);
