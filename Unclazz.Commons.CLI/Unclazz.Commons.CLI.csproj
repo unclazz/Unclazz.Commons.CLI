@@ -42,6 +42,21 @@
     <Compile Include="Option.cs" />
     <Compile Include="OptionCollection.cs" />
     <Compile Include="HelpFormatter.cs" />
+    <Compile Include="V2\ICommandLine.cs" />
+    <Compile Include="V2\IOption.cs" />
+    <Compile Include="V2\IParser.cs" />
+    <Compile Include="V2\OptionBuilder.cs" />
+    <Compile Include="V2\CommandLineBuilder.cs" />
+    <Compile Include="V2\CommandLine.cs" />
+    <Compile Include="V2\Option.cs" />
+    <Compile Include="V2\OptionCollection.cs" />
+    <Compile Include="V2\Parser.cs" />
+    <Compile Include="V2\ParseException.cs" />
+    <Compile Include="V2\ParseExceptionCategory.cs" />
+    <Compile Include="V2\HelpFormatter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="V2\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
