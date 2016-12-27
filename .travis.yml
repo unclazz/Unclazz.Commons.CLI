@@ -1,0 +1,9 @@
+language: csharp
+script:
+  - xbuild /p:Configuration=Debug Unclazz.Commons.CLI.sln
+before_install:
+  - sudo apt-get install nunit-console
+before_script:
+  - nuget restore Unclazz.Commons.CLI.sln
+after_script:
+  - nunit-console Test.Unclazz.Commons.CLI/bin/Debug/Test.Unclazz.Commons.CLI.dll
