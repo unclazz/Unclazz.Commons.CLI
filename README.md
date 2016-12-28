@@ -1,5 +1,7 @@
 # Unclazz.Commons.CLI
 
+[![Build Status](https://travis-ci.org/unclazz/Unclazz.Commons.CLI.svg?branch=master)](https://travis-ci.org/unclazz/Unclazz.Commons.CLI)
+
 `Unclazz.Commons.CLI`は.NETランタイム上で実行するコマンドライン・アプリケーションを構築する際、コマンドライン・オプションの定義や定義に基づくパースを行うためのライブラリです。開発開始の当初念頭にあったのは`Apache Commons CLI`ですが結果的にはまったくの別物となっています。アセンブリは[NuGet Gallery](https://www.nuget.org/packages/Unclazz.Commons.CLI/)で公開されているので、NuGetを通じて取得することができます。
 
 ## コンポーネント
