@@ -74,6 +74,7 @@ namespace Unclazz.Commons.CLI
 		/// </summary>
 		/// <param name="rawArgs">コマンドライン引数</param>
 		/// <param name="settings">アプリケーション構成ファイルの設定情報</param>
+        /// <param name="vo">パース結果を設定するバリュー・オブジェクト</param>
 		void ResolveOptions(IEnumerable<string> rawArgs, IDictionary<string, string> settings, T vo)
 		{
 			// 1. コマンドライン引数の処理（前段階）
@@ -188,16 +189,17 @@ namespace Unclazz.Commons.CLI
 			}
 		}
 
-		/// <summary>
-		/// 一連のコマンドライン・オプションの値をその定義情報にしたがい解決します。
-		/// このメソッドはコマンドライン引数を入力として、
-		/// コマンドライン・オプションの定義情報に規定された情報を読み取ります。
-		/// </summary>
-		/// <returns>値解決に成功した場合は<c>true</c></returns>
-		/// <param name="former">1つ目のコマンドライン引数</param>
-		/// <param name="latter">2つ目のコマンドライン引数</param>
-		/// <param name="ctx">値解決状況を記録した辞書</param>
-		bool ResolveOptionsWithArguments(string former, string latter,
+        /// <summary>
+        /// 一連のコマンドライン・オプションの値をその定義情報にしたがい解決します。
+        /// このメソッドはコマンドライン引数を入力として、
+        /// コマンドライン・オプションの定義情報に規定された情報を読み取ります。
+        /// </summary>
+        /// <returns>値解決に成功した場合は<c>true</c></returns>
+        /// <param name="former">1つ目のコマンドライン引数</param>
+        /// <param name="latter">2つ目のコマンドライン引数</param>
+        /// <param name="ctx">値解決状況を記録した辞書</param>
+        /// <param name="vo">パース結果を設定するバリュー・オブジェクト</param>
+        bool ResolveOptionsWithArguments(string former, string latter,
 			 Dictionary<IOption<T>, List<string>> ctx, T vo)
 		{
 			// オプション定義うちで名前もしくは別名が一致するものを検索
@@ -237,16 +239,17 @@ namespace Unclazz.Commons.CLI
 			}
 		}
 
-		/// <summary>
-		/// 一連のコマンドライン・オプションの値をその定義情報にしたがい解決します。
-		/// このメソッドはアプリケーション構成ファイルの設定情報を入力として、
-		/// コマンドライン・オプションの定義情報に規定された情報を読み取ります。
-		/// </summary>
-		/// <returns>値解決に成功した場合は<c>true</c></returns>
-		/// <param name="key">設定情報のキー名</param>
-		/// <param name="value">設定情報の値</param>
-		/// <param name="ctx">値解決状況を記録した辞書</param>
-		bool ResolveOptionsWithAppSettings(string key, string value,
+        /// <summary>
+        /// 一連のコマンドライン・オプションの値をその定義情報にしたがい解決します。
+        /// このメソッドはアプリケーション構成ファイルの設定情報を入力として、
+        /// コマンドライン・オプションの定義情報に規定された情報を読み取ります。
+        /// </summary>
+        /// <returns>値解決に成功した場合は<c>true</c></returns>
+        /// <param name="key">設定情報のキー名</param>
+        /// <param name="value">設定情報の値</param>
+        /// <param name="ctx">値解決状況を記録した辞書</param>
+        /// <param name="vo">パース結果を設定するバリュー・オブジェクト</param>
+        bool ResolveOptionsWithAppSettings(string key, string value,
 			 Dictionary<IOption<T>, List<string>> ctx, T vo)
 		{
 			// オプション定義うちでキー名が該当するものを検索

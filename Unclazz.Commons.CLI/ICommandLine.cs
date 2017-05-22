@@ -47,9 +47,18 @@ namespace Unclazz.Commons.CLI
 		/// パーサ・インスタンスを取得します。
 		/// </summary>
 		/// <returns>パーサ</returns>
-		/// <param name="valueObject">パースした結果の値が設定されるバリュー・オブジェクト</param>
+		/// <param name="valueObject">パース結果が設定されるバリュー・オブジェクト</param>
 		IParser<T> GetParser(T valueObject);
+        /// <summary>
+        /// パーサ・インスタンスを取得します。
+        /// </summary>
+        /// <returns>パーサ</returns>
+        /// <param name="valueObjectSupplier">パース結果が設定されるバリュー・オブジェクトのサプライヤー</param>
 		IParser<T> GetParser(Func<T> valueObjectSupplier);
+        /// <summary>
+        /// パーサ・インスタンスを取得します。
+        /// </summary>
+        /// <returns>パーサ</returns>
 		IParser<T> GetParser();
 	}
 }

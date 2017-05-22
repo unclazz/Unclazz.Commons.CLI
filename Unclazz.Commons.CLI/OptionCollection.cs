@@ -21,7 +21,10 @@ namespace Unclazz.Commons.CLI
 			list = options.OrderBy(o => o.Name)
 			              .ToList().AsReadOnly();
 		}
-
+        /// <summary>
+        /// 列挙子を返します。
+        /// </summary>
+        /// <returns>列挙子</returns>
 		public IEnumerator<IOption<T>> GetEnumerator()
 		{
 			return list.GetEnumerator();

@@ -11,7 +11,7 @@ namespace Unclazz.Commons.CLI
 		/// </summary>
 		UnexpectedErrorHasOccurred = 0,
 		/// <summary>
-		/// <see cref="IOption.SetterDelegate"/>が参照するデリゲート内でエラーが発生しました。
+        /// <see cref="IOption{T}.SetterDelegate"/>が参照するデリゲート内でエラーが発生しました。
 		/// </summary>
 		SetterErrorHasOccurred = 1,
 		/// <summary>
